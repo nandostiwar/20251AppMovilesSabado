@@ -27,7 +27,7 @@ function multiplicar(req, res){
     })
 }
 
-function multiplicar(req, res){
+function dividir(req, res){
     const {body} = req;
     const {number1, number2} = body;
     const result = divide(number1, number2);
