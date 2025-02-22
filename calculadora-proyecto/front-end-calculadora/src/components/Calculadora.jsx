@@ -21,6 +21,11 @@ function Calculadora(){
                 // setResultado(responseData)
                 // console.log(resultado)
             })
+            .catch(error => {
+                console.error("Error en la operación:", error);
+                setResultado("Error en la operación");
+            });
+    
     }
 
     return (

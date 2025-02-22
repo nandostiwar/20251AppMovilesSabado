@@ -27,14 +27,17 @@ function multiplicar(req, res){
     })
 }
 
-function dividir(req, res){
-    const {body} = req;
-    const {number1, number2} = body;
-    const result = divide(number1, number2);
-    res.json({
-        resultado: result
-    })
+function dividir(req, res) {
+    const { body } = req;
+    const { number1, number2 } = body;
+    try {
+        const result = divide(number1, number2);
+        res.json({ resultado: result });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
 }
+
 
 module.exports = {
     sumar,
