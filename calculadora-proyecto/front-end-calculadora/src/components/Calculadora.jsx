@@ -12,30 +12,33 @@ function Calculadora(){
         const operacion = e.target.value;
         fetch(`http://localhost:3500/v1/calculadora/${operacion}`, {
             method: 'POST',
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({number1, number2})
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ number1, number2 })
         })
-            .then(res =>res.json())
-            .then(responseData => {
-                setResultado(responseData.resultado)
-                // setResultado(responseData)
-                // console.log(resultado)
-            })
+        .then(res => res.json())
+        .then(responseData => {
+            setResultado(responseData.resultado);
+        })
+        .catch(error => {
+            console.error("Error en la operación:", error);
+            setResultado("Error en la operación");
+        });
     }
 
     return (
         <div className="container">
             <h1 id="txtCalculadora">CALCULADORA</h1>
             <form>
-                <input type="text" className="number" onChange={(e)=>{setNumber1(e.target.value)}}/><br />
-                <input type="text" className="number" onChange={(e)=>{setNumber2(e.target.value)}}/><br />
-                <input type="submit" className="btnEnviar" value="sumar" onClick={handleSubmit}/>
-                <input type="submit" className="btnEnviar" value="restar" onClick={handleSubmit}/>
-                <input type="submit" className="btnEnviar" value="multiplicar" onClick={handleSubmit}/>
+                <input type="text" className="number" onChange={(e) => setNumber1(e.target.value)} /><br />
+                <input type="text" className="number" onChange={(e) => setNumber2(e.target.value)} /><br />
+                <input type="submit" className="btnEnviar" value="sumar" onClick={handleSubmit} />
+                <input type="submit" className="btnEnviar" value="restar" onClick={handleSubmit} />
+                <input type="submit" className="btnEnviar" value="multiplicar" onClick={handleSubmit} />
+                <input type="submit" className="btnEnviar" value="dividir" onClick={handleSubmit} /> {/* Botón de dividir agregado */}
             </form>
-            <Resultado resultado={"El resultado es "+ resultado}/>
+            <Resultado resultado={"El resultado es " + resultado} />
         </div>
-    )
+    );
 }
 
-export default Calculadora
+export default Calculadora;
