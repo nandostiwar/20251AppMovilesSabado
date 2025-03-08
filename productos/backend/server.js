@@ -7,11 +7,10 @@ app.use(express.json());
 app.use(cors());
 
 // Conexión a MongoDB
-mongoose.connect('mongodb+srv://unicatolica:ySAh5OH3p7CZNMxk@cluster0.cjuezls.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
+mongoose.connect('mongodb+srv://FabianChagueza:E0CmKyllTNgAqu6T@cluster0.m1z1g.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
-
 
 // Definir esquema y modelo
 const ventaSchema = new mongoose.Schema({
