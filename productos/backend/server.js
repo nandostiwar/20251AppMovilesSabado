@@ -7,10 +7,10 @@ app.use(express.json());
 app.use(cors());
 
 // Conexión a MongoDB
-mongoose.connect('mongodb+srv://unicatolica:ySAh5OH3p7CZNMxk@cluster0.cjuezls.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
+mongoose.connect('mongodb+srv://estebanmunoz03:CSKqcWG6knNzOEuR@cluster0.oyrru.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
+    .then(() => console.log("Conectado a MongoDB")) 
+    .catch(err => console.error("Error al conectar a MongoDB", err));
+
 
 
 // Definir esquema y modelo
