@@ -18,6 +18,7 @@
   "homepage": "https://github.com/nandostiwar/20251AppMovilesSabado#readme",
   "description": "",
   "devDependencies": {
+    "nodemon": "^3.1.9",
     "vite": "^6.2.0"
   }
 }

@@ -6,11 +6,17 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// Conexión a MongoDB
-mongoose.connect('mongodb+srv://jorgeborrero01:aw4fD2k0wglCTDY0@cluster0.zjo0v.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
+
+mongoose.connect('mongodb+srv://jorgeborrero01:6uCU8x4BLU4z0DON@cluster0.zjo0v.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
+
+/*// Conexión a MongoDB
+mongoose.connect('mongodb+srv://jorgeborrero01:aw4fD2k0wglCTDY0@cluster0.zjo0v.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});*/
 
 
 // Definir esquema y modelo
