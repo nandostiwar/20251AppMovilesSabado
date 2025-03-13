@@ -7,8 +7,8 @@ function App() {
 
   // Función para obtener las ventas
   const fetchVentas = async () => {
-    //const response = await fetch('http://localhost:5000/ventas');
-    const response = await fetch('https://rk0k46fr-5000.use.devtunnels.ms/ventas');
+    const response = await fetch('http://localhost:5000/ventas');
+    //const response = await fetch('https://rk0k46fr-5000.use.devtunnels.ms/ventas');
     const data = await response.json();
     setVentas(data);
   };
@@ -20,8 +20,8 @@ function App() {
   // Manejar envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
-    //const response = await fetch('http://localhost:5000/ventas', {
-    const response = await fetch('https://rk0k46fr-5000.use.devtunnels.ms/ventas', {
+    const response = await fetch('http://localhost:5000/ventas', {
+    //const response = await fetch('https://rk0k46fr-5000.use.devtunnels.ms/ventas', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ nombre, producto })
