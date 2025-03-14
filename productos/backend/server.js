@@ -6,7 +6,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-mongoose.connect('mongodb+srv://BdBas:6KHFZZMJpbLirNxX@cluster0.b12u1.mongodb.net/tienda?retryWrites=true&w=majority&appName=Cluster0', {
+mongoose.connect('mongodb+srv://sebastian:ZEOZiw5CZdHmkhzP@desarrollomovil.0jb9p.mongodb.net/?retryWrites=true&w=majority&appName=DesarrolloMovil', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => console.log('Conectado a MongoDB')).catch(err => console.error('Error al conectar a MongoDB:', err));
