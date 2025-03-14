@@ -8,8 +8,6 @@ app.use(cors());
 
 // Conexión a MongoDB
 mongoose.connect('mongodb+srv://sebastian:ZEOZiw5CZdHmkhzP@desarrollomovil.0jb9p.mongodb.net/?retryWrites=true&w=majority&appName=DesarrolloMovil', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
 });
 
 
