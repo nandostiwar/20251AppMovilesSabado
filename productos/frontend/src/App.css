@@ -1,0 +1,117 @@
+/* Variables CSS para un diseño oscuro y dinámico */
+:root {
+  --primary-color: #ff5733;
+  --secondary-color: #c70039;
+  --accent-color: #900c3f;
+  --text-color: #f8f9fa;
+  --background-color: #1c1c1c;
+  --card-bg: #2a2a2a;
+  --card-shadow: 0 4px 15px rgba(255, 87, 51, 0.3);
+  --transition: 300ms ease-in-out;
+  --border-radius: 12px;
+}
+
+/* Estilos generales */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-header {
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  color: white;
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 1.8rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.app-content {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.app-footer {
+  background-color: var(--secondary-color);
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Tarjetas con animaciones */
+.card {
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-shadow);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(255, 87, 51, 0.5);
+}
+
+/* Botones dinámicos */
+button, .button {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 0.8rem 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color var(--transition), transform var(--transition);
+}
+
+button:hover, .button:hover {
+  background: var(--secondary-color);
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(255, 87, 51, 0.4);
+}
+
+/* Animaciones clave */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.app-header, .card, button {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+  .app-content {
+    padding: 1rem;
+  }
+
+  .card {
+    padding: 1.5rem;
+  }
+}
