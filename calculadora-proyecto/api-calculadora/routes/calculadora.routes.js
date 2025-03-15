@@ -6,6 +6,9 @@ router
     .post('/sumar', calculadoraControllers.sumar)
     .post('/restar', calculadoraControllers.restar)
     .post('/multiplicar', calculadoraControllers.multiplicar)
+<<<<<<< HEAD
     .post('/dividir', calculadoraControllers.dividir)
+=======
+>>>>>>> MozartCuidadorDigital
 
 module.exports = router;

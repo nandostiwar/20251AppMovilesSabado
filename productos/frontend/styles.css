@@ -1,0 +1,16 @@
+/*body {
+    background-color: lightblue; Cambia el color a tu preferencia
+}*/
+
+body {
+    background-image: url('./pics/picbg.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    display: flex;
+    justify-content: center;  /* Centra horizontalmente */
+    align-items: center;      /* Centra verticalmente */
+    height: 100vh;            /* Ocupa toda la pantalla */
+    margin: 0;
+    text-align: center; 
+}

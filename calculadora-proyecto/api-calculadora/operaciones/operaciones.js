@@ -23,6 +23,7 @@ function multiply(a, b){
     return number1 * number2;
 }
 
+<<<<<<< HEAD
 function divide(a, b){
     let number1 = parseInt(a);
     let number2 = parseInt(b);
@@ -34,4 +35,10 @@ module.exports = {
     subtract,
     multiply,
     divide
+=======
+module.exports = {
+    add,
+    subtract,
+    multiply
+>>>>>>> MozartCuidadorDigital
 }

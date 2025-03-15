@@ -32,7 +32,10 @@ function Calculadora(){
                 <input type="submit" className="btnEnviar" value="sumar" onClick={handleSubmit}/>
                 <input type="submit" className="btnEnviar" value="restar" onClick={handleSubmit}/>
                 <input type="submit" className="btnEnviar" value="multiplicar" onClick={handleSubmit}/>
+<<<<<<< HEAD
                 <input type="submit" className="btnEnviar" value="dividir" onClick={handleSubmit}/>
+=======
+>>>>>>> MozartCuidadorDigital
             </form>
             <Resultado resultado={"El resultado es "+ resultado}/>
         </div>
