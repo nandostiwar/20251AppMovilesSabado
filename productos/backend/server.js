@@ -7,29 +7,51 @@ app.use(express.json());
 app.use(cors());
 
 // Conexión a MongoDB
-mongoose.connect('mongodb+srv://unicatolica:ySAh5OH3p7CZNMxk@cluster0.cjuezls.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
+mongoose.connect('mongodb+srv://alejoesmo:Edwardjunior@cluster0.ovtdg3f.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
   useNewUrlParser: true,
   useUnifiedTopology: true
-});
+})
+.then(() => console.log("✅ Conectado a MongoDB Atlas"))
+.catch(err => console.error("❌ Error conectando a MongoDB:", err.message));
 
-
-// Definir esquema y modelo
+// Definir esquema y modelo para la colección "ventas"
 const ventaSchema = new mongoose.Schema({
-  nombre: String,
-  producto: String
+  nombre: { type: String, required: true },
+  producto: { type: String, required: true }
 });
 
 const Venta = mongoose.model('Venta', ventaSchema);
 
-// Ruta para crear una venta
+// Definir esquema y modelo para la colección "clientes"
+const clienteSchema = new mongoose.Schema({
+  nombre: { type: String, required: true },
+  telefono: { type: String, required: true },
+  direccion: { type: String, required: true },
+  correo: { type: String, required: true }
+});
+
+const Cliente = mongoose.model('Cliente', clienteSchema);
+
+// Ruta para crear una venta y guardar datos del cliente en otra colección
 app.post('/ventas', async (req, res) => {
   try {
-    const { nombre, producto } = req.body;
+    const { nombre, producto, telefono, direccion, correo } = req.body;
+
+    if (!nombre || !producto || !telefono || !direccion || !correo) {
+      return res.status(400).json({ error: "Todos los campos son obligatorios" });
+    }
+
+    // Guardar en la colección "ventas"
     const nuevaVenta = new Venta({ nombre, producto });
     await nuevaVenta.save();
-    res.status(201).json(nuevaVenta);
+
+    // Guardar en la colección "clientes"
+    const nuevoCliente = new Cliente({ nombre, telefono, direccion, correo });
+    await nuevoCliente.save();
+
+    res.status(201).json({ venta: nuevaVenta, cliente: nuevoCliente });
   } catch (error) {
-    res.status(500).json({ error: 'Error al crear la venta' });
+    res.status(500).json({ error: 'Error al procesar la solicitud' });
   }
 });
 
@@ -43,6 +65,16 @@ app.get('/ventas', async (req, res) => {
   }
 });
 
+// Ruta para obtener todos los clientes
+app.get('/clientes', async (req, res) => {
+  try {
+    const clientes = await Cliente.find();
+    res.json(clientes);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener los clientes' });
+  }
+});
+
 // Iniciar servidor
 const PORT = 5000;
-app.listen(PORT, () => console.log(`Servidor corriendo en el puerto ${PORT}`));
+app.listen(PORT, () => console.log(`🚀 Servidor corriendo en el puerto ${PORT}`));
