@@ -4,6 +4,7 @@ import './EmailForm.css';
 
 const EmailForm = ({ showNotification }) => {
   const [formData, setFormData] = useState({
+    from: '',  // Añadido campo remitente
     to: '',
     subject: '',
     message: '',
@@ -19,7 +20,7 @@ const EmailForm = ({ showNotification }) => {
     e.preventDefault();
     
     // Validar formulario
-    if (!formData.to || !formData.subject || !formData.message) {
+    if (!formData.from || !formData.to || !formData.subject || !formData.message) {
       showNotification('Todos los campos son requeridos', 'error');
       return;
     }
@@ -39,7 +40,7 @@ const EmailForm = ({ showNotification }) => {
       if (response.data.success) {
         showNotification('Email enviado correctamente!', 'success');
         // Limpiar formulario
-        setFormData({ to: '', subject: '', message: '' });
+        setFormData({ from: '', to: '', subject: '', message: '' });
       } else {
         showNotification('Error al enviar el email', 'error');
       }
@@ -69,6 +70,18 @@ const EmailForm = ({ showNotification }) => {
     <div className="email-form-container">
       <h2>Nuevo correo</h2>
       <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="from">Remitente:</label>
+          <input
+            type="email"
+            id="from"
+            name="from"
+            value={formData.from}
+            onChange={handleChange}
+            placeholder="tu@correo.com"
+          />
+        </div>
+
         <div className="form-group">
           <label htmlFor="to">Destinatario:</label>
           <input
@@ -113,7 +126,7 @@ const EmailForm = ({ showNotification }) => {
           {loading ? 'Enviando...' : 'Enviar correo'}
         </button>
       </form>
-    </div>
+    </div> 
   );
 };
 

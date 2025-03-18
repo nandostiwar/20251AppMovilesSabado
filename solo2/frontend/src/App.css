@@ -13,6 +13,78 @@
   margin-bottom: 20px;
 }
 
+.navigation-tabs {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.navigation-tabs button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.navigation-tabs button:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.navigation-tabs button.active {
+  background-color: #4CAF50;
+  border-color: #4CAF50;
+  color: white;
+}
+
+/* Estilos para botón deshabilitado */
+.navigation-tabs button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  border-color: #999;
+  color: #ccc;
+}
+
+/* Estilos para tooltip */
+.tooltip {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 4px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 12px;
+}
+
+.tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.navigation-tabs button:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
 main {
   background-color: #f5f5f5;
   padding: 20px;
