@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import './UserForm.css';
+import { AuthContext } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const UserForm = ({ showNotification, onValidEmail }) => {
   const [formData, setFormData] = useState({
@@ -15,6 +17,15 @@ const UserForm = ({ showNotification, onValidEmail }) => {
   const [isEmailAvailable, setIsEmailAvailable] = useState(false);
   const [isExistingEmail, setIsExistingEmail] = useState(false); // New state for existing emails
   const [showEmailForm, setShowEmailForm] = useState(false); // State to toggle email form
+  const { user } = useContext(AuthContext); // Obtener el usuario del contexto
+  const navigate = useNavigate(); // Definir navigate para redirecciones
+
+  useEffect(() => {
+    // Redirigir al panel de administrador si el usuario es un administrador
+    if (user?.role === 'admin') {
+      navigate('/admin-panel');
+    }
+  }, [user, navigate]);
 
   useEffect(() => {
     // Cargar la lista de usuarios al montar el componente
@@ -214,120 +225,124 @@ const UserForm = ({ showNotification, onValidEmail }) => {
 
   return (
     <div className="email-form-container">
-      <h2>Registro de Usuarios</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="nombre">Nombre:</label>
-          <input
-            type="text"
-            id="nombre"
-            name="nombre"
-            value={formData.nombre}
-            onChange={handleChange}
-            placeholder="Ingrese su nombre"
-          />
-        </div>
-        
-        <div className="form-group">
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="Ingrese su correo electrónico"
-            className={formData.email ? (isEmailAvailable ? 'valid-email' : isExistingEmail ? 'existing-email' : 'invalid-email') : ''}
-          />
-          {formData.email && !isEmailAvailable && !isExistingEmail && (
-            <span className="email-validation-message">Este email no es válido</span>
-          )}
-          {formData.email && isEmailAvailable && (
-            <span className="email-validation-success">Email disponible para registro</span>
-          )}
-          {formData.email && isExistingEmail && (
-            <span className="email-validation-message">Este email ya está registrado. Puede enviar un correo.</span>
-          )}
-        </div>
+      {user?.role !== 'admin' && (
+        <> {/* Mostrar solo si no es administrador */}
+          <h2>Registro de Usuarios</h2>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="nombre">Nombre:</label>
+              <input
+                type="text"
+                id="nombre"
+                name="nombre"
+                value={formData.nombre}
+                onChange={handleChange}
+                placeholder="Ingrese su nombre"
+              />
+            </div>
+            
+            <div className="form-group">
+              <label htmlFor="email">Email:</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Ingrese su correo electrónico"
+                className={formData.email ? (isEmailAvailable ? 'valid-email' : isExistingEmail ? 'existing-email' : 'invalid-email') : ''}
+              />
+              {formData.email && !isEmailAvailable && !isExistingEmail && (
+                <span className="email-validation-message">Este email no es válido</span>
+              )}
+              {formData.email && isEmailAvailable && (
+                <span className="email-validation-success">Email disponible para registro</span>
+              )}
+              {formData.email && isExistingEmail && (
+                <span className="email-validation-message">Este email ya está registrado. Puede enviar un correo.</span>
+              )}
+            </div>
 
-        <div className="button-container">
-          {isExistingEmail ? (
-            <button 
-              type="button"
-              className="email-button"
-              onClick={toggleEmailForm}
-            >
-              {showEmailForm ? 'Cancelar' : 'Enviar Correo'}
-            </button>
-          ) : (
-            <button 
-              type="submit" 
-              className="send-button" 
-              disabled={loading || !isEmailAvailable || !formData.nombre}
-            >
-              {loading ? 'Registrando...' : 'Registrar Usuario'}
-            </button>
-          )}
-        </div>
-      </form>
+            <div className="button-container">
+              {isExistingEmail ? (
+                <button 
+                  type="button"
+                  className="email-button"
+                  onClick={toggleEmailForm}
+                >
+                  {showEmailForm ? 'Cancelar' : 'Enviar Correo'}
+                </button>
+              ) : (
+                <button 
+                  type="submit" 
+                  className="send-button" 
+                  disabled={loading || !isEmailAvailable || !formData.nombre}
+                >
+                  {loading ? 'Registrando...' : 'Registrar Usuario'}
+                </button>
+              )}
+            </div>
+          </form>
 
-      {showEmailForm && isExistingEmail && (
-        <form onSubmit={handleSendEmail} className="email-message-form">
-          <div className="form-group">
-            <label htmlFor="from">Tu correo (remitente):</label>
-            <input
-              type="email"
-              id="from"
-              name="from"
-              value={formData.from || ''}
-              onChange={handleChange}
-              placeholder="tu@correo.com"
-              required
-            />
+          {showEmailForm && isExistingEmail && (
+            <form onSubmit={handleSendEmail} className="email-message-form">
+              <div className="form-group">
+                <label htmlFor="from">Tu correo (remitente):</label>
+                <input
+                  type="email"
+                  id="from"
+                  name="from"
+                  value={formData.from || ''}
+                  onChange={handleChange}
+                  placeholder="tu@correo.com"
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="mensaje">Mensaje:</label>
+                <textarea
+                  id="mensaje"
+                  name="mensaje"
+                  value={formData.mensaje}
+                  onChange={handleChange}
+                  placeholder="Escriba su mensaje"
+                  rows="4"
+                  required
+                ></textarea>
+              </div>
+              <button 
+                type="submit"
+                className="send-button"
+                disabled={loading}
+              >
+                {loading ? 'Enviando...' : 'Enviar Correo'}
+              </button>
+            </form>
+          )}
+
+          {debug && (
+            <div className="debug-info">
+              <h4>Información de depuración:</h4>
+              <pre>{debug}</pre>
+            </div>
+          )}
+
+          <div className="usuarios-list">
+            <h3>Usuarios Registrados</h3>
+            {usuarios.length > 0 ? (
+              <ul>
+                {usuarios.map((usuario, index) => (
+                  <li key={index}>
+                    <strong>{usuario.nombre}</strong> - {usuario.email}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p>No hay usuarios registrados todavía.</p>
+            )}
           </div>
-          <div className="form-group">
-            <label htmlFor="mensaje">Mensaje:</label>
-            <textarea
-              id="mensaje"
-              name="mensaje"
-              value={formData.mensaje}
-              onChange={handleChange}
-              placeholder="Escriba su mensaje"
-              rows="4"
-              required
-            ></textarea>
-          </div>
-          <button 
-            type="submit"
-            className="send-button"
-            disabled={loading}
-          >
-            {loading ? 'Enviando...' : 'Enviar Correo'}
-          </button>
-        </form>
+        </>
       )}
-
-      {debug && (
-        <div className="debug-info">
-          <h4>Información de depuración:</h4>
-          <pre>{debug}</pre>
-        </div>
-      )}
-
-      <div className="usuarios-list">
-        <h3>Usuarios Registrados</h3>
-        {usuarios.length > 0 ? (
-          <ul>
-            {usuarios.map((usuario, index) => (
-              <li key={index}>
-                <strong>{usuario.nombre}</strong> - {usuario.email}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>No hay usuarios registrados todavía.</p>
-        )}
-      </div>
     </div>
   );
 };

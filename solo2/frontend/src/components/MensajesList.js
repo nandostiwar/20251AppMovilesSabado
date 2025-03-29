@@ -2,24 +2,48 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './MensajesList.css';
 
-const MensajesList = ({ showNotification }) => {
+const MensajesList = ({ showNotification, messageSent }) => {
   const [mensajes, setMensajes] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [debugInfo, setDebugInfo] = useState(null);
+  const [autoRefresh, setAutoRefresh] = useState(true);
+  const [lastRefreshed, setLastRefreshed] = useState(null);
 
+  // Efecto para cargar mensajes al montar el componente
   useEffect(() => {
     fetchMensajes();
-  }, []);
+    
+    // Establecer un intervalo para actualizar automáticamente si autoRefresh está activado
+    let intervalId;
+    if (autoRefresh) {
+      intervalId = setInterval(() => {
+        fetchMensajes(false); // silent refresh (sin notificaciones)
+      }, 10000); // Actualizar cada 10 segundos
+    }
+    
+    return () => {
+      if (intervalId) clearInterval(intervalId);
+    };
+  }, [autoRefresh]);
+  
+  // Efecto para actualizar cuando se envía un nuevo mensaje
+  useEffect(() => {
+    if (messageSent) {
+      // Esperar un momento para dar tiempo a que el mensaje se guarde
+      setTimeout(() => {
+        fetchMensajes();
+      }, 1500);
+    }
+  }, [messageSent]);
 
-  const fetchMensajes = async () => {
+  const fetchMensajes = async (showNotifications = true) => {
     setLoading(true);
     setError(null);
-    setDebugInfo(null);
     
     try {
       const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
-      console.log('Intentando cargar mensajes desde:', `${apiUrl}/mensajes`);
+      console.log('Cargando mensajes desde:', `${apiUrl}/mensajes`);
       
       const response = await axios.get(`${apiUrl}/mensajes`);
       console.log('Respuesta del servidor (mensajes):', response.data);
@@ -27,34 +51,48 @@ const MensajesList = ({ showNotification }) => {
       // En caso de que la respuesta sea exitosa pero no tengamos un array
       if (!Array.isArray(response.data)) {
         console.warn('La respuesta del servidor no es un array:', response.data);
-        showNotification('Formato de respuesta inesperado', 'warning');
+        if (showNotifications) {
+          showNotification('Formato de respuesta inesperado', 'warning');
+        }
         setMensajes([]);
       } else {
-        setMensajes(response.data);
+        // Ordenar mensajes por fecha, más recientes primero
+        const mensajesOrdenados = [...response.data].sort((a, b) => 
+          new Date(b.fecha) - new Date(a.fecha)
+        );
         
-        // Si hay mensajes, mostrar notificación
-        if (response.data.length > 0) {
-          showNotification(`Se cargaron ${response.data.length} mensajes`, 'success');
-        } else {
-          showNotification('No hay mensajes para mostrar', 'info');
+        setMensajes(mensajesOrdenados);
+        setLastRefreshed(new Date());
+        
+        // Si hay mensajes y showNotifications está activo, mostrar notificación
+        if (showNotifications) {
+          if (response.data.length > 0) {
+            showNotification(`Se cargaron ${response.data.length} mensajes`, 'success');
+          } else {
+            showNotification('No hay mensajes para mostrar', 'info');
+          }
         }
       }
       
       setDebugInfo({
         url: `${apiUrl}/mensajes`,
         responseStatus: response.status,
-        responseData: response.data
+        responseData: response.data,
+        timestamp: new Date().toISOString()
       });
       
     } catch (error) {
       console.error('Error al cargar mensajes:', error);
       setError('No se pudieron cargar los mensajes enviados');
-      showNotification('Error al cargar mensajes', 'error');
+      if (showNotifications) {
+        showNotification('Error al cargar mensajes', 'error');
+      }
       
       setDebugInfo({
         url: `${(process.env.REACT_APP_API_URL || 'http://localhost:5000')}/mensajes`,
         error: error.message,
-        errorResponse: error.response ? error.response.data : 'No response data'
+        errorResponse: error.response ? error.response.data : 'No response data',
+        timestamp: new Date().toISOString()
       });
     } finally {
       setLoading(false);
@@ -96,10 +134,8 @@ const MensajesList = ({ showNotification }) => {
       
       showNotification('Correo de prueba enviado correctamente', 'success');
       
-      // Esperar un momento antes de actualizar la lista
-      setTimeout(() => {
-        fetchMensajes();
-      }, 1000);
+      // Actualizar la lista inmediatamente
+      fetchMensajes();
       
     } catch (error) {
       console.error('Error al enviar correo de prueba:', error);
@@ -108,27 +144,45 @@ const MensajesList = ({ showNotification }) => {
     }
   };
 
+  // Alternar la actualización automática
+  const toggleAutoRefresh = () => {
+    setAutoRefresh(!autoRefresh);
+  };
+
   return (
     <div className="mensajes-container">
       <h2>Mensajes Enviados</h2>
       
       <div className="button-container">
         <button 
-          onClick={fetchMensajes} 
+          onClick={() => fetchMensajes(true)} 
           className="refresh-button"
           disabled={loading}
         >
           {loading ? 'Cargando...' : 'Refrescar Mensajes'}
         </button>
         
-        {/* <button 
+        <button
+          onClick={toggleAutoRefresh}
+          className={`auto-refresh-button ${autoRefresh ? 'active' : ''}`}
+        >
+          {autoRefresh ? '🔄 Auto-refresh ON' : '⏸️ Auto-refresh OFF'}
+        </button>
+        
+        <button 
           onClick={enviarCorreoDePrueba}
           className="test-button"
           disabled={loading}
         >
           Enviar Correo de Prueba
-        </button> */}
+        </button>
       </div>
+
+      {lastRefreshed && (
+        <div className="last-refreshed">
+          Última actualización: {formatDate(lastRefreshed)}
+        </div>
+      )}
 
       {error && <div className="error-message">{error}</div>}
       

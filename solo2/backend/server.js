@@ -213,7 +213,8 @@ app.post('/send-email', async (req, res) => {
     });
     
     const mensajeGuardado = await nuevoMensaje.save();
-    console.log('Mensaje guardado en la base de datos:', mensajeGuardado);
+    console.log('✅ Mensaje guardado en la base de datos con ID:', mensajeGuardado._id);
+    console.log('📝 Detalles del mensaje guardado:', JSON.stringify(mensajeGuardado, null, 2));
     
     // Verificamos que se guarde correctamente y devolvemos el mensaje guardado
     res.status(200).json({ 
@@ -222,7 +223,7 @@ app.post('/send-email', async (req, res) => {
       mensajeId: mensajeGuardado._id
     });
   } catch (error) {
-    console.error('Error al enviar email:', error);
+    console.error('❌ Error al enviar email:', error);
     res.status(500).json({ 
       success: false, 
       message: 'Error al enviar el email',
