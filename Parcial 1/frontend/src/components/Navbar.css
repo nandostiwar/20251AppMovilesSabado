@@ -1,0 +1,10 @@
+.navbar-brand {
+    font-size: 1.2rem;
+  }
+  
+  .navbar .btn {
+    font-size: 0.9rem;
+  }
+  .navbar-brand img {
+    object-fit: cover;
+  }
