@@ -209,7 +209,7 @@ const PurchaseForm = () => {
               </Button>
               <Button 
                 variant="outline-secondary" 
-                onClick={() => navigate('/products')}
+                onClick={() => navigate('/')}
                 disabled={loading || success}
               >
                 Cancelar
