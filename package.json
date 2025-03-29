@@ -1,0 +1,24 @@
+{
+  "name": "20251appmovilessabado",
+  "version": "1.0.0",
+  "main": "juanAyala202.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nandostiwar/20251AppMovilesSabado.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nandostiwar/20251AppMovilesSabado/issues"
+  },
+  "homepage": "https://github.com/nandostiwar/20251AppMovilesSabado#readme",
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^3.1.9",
+    "vite": "^6.2.0"
+  }
+}
