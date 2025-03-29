@@ -10,7 +10,7 @@ const purchaseRoutes = require('./routes/purchases');
 
 // Inicializar express
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3500; // Cambiado a puerto 3500
 
 // Middlewares
 app.use(cors());
