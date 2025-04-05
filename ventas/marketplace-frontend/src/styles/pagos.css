@@ -1,0 +1,74 @@
+.pasarela-container {
+    max-width: 500px;
+    margin: 50px auto;
+    background: #1f1f2e;
+    padding: 30px;
+    border-radius: 15px;
+    color: white;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    font-family: 'Segoe UI', sans-serif;
+    animation: fadeIn 0.8s ease;
+  }
+  
+  h2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 24px;
+    margin-bottom: 25px;
+    color: #00d0ff;
+  }
+  
+  .resumen p {
+    font-size: 16px;
+    margin: 5px 0 10px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  input {
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    background: #2e2e3f;
+    color: white;
+  }
+  
+  input::placeholder {
+    color: #ccc;
+  }
+  
+  input:focus {
+    outline: 2px solid #00d0ff;
+    background-color: #36364d;
+    transition: 0.3s ease;
+  }
+  
+  .btn-pagar {
+    margin-top: 10px;
+    background: #00d0ff;
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .btn-pagar:hover {
+    background: #00a6d6;
+    transform: scale(1.02);
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px);}
+    to { opacity: 1; transform: translateY(0);}
+  }
+  
