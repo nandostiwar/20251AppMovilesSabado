@@ -18,7 +18,7 @@ const ventaSchema = new mongoose.Schema({
     },
     estado: {
         type: String,
-        enum: ['procesando', 'completada', 'rechazada'],
+        enum: ['procesando', 'Completada', 'Rechazada'],
         default: 'procesando'
     },
     fecha: {

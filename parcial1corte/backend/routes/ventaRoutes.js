@@ -61,7 +61,7 @@ router.put('/:id/estado', verificarAdmin, async (req, res) => {
         }
 
         // Validar que el nuevo estado sea válido
-        if (!['procesando', 'completada', 'rechazada'].includes(estado)) {
+        if (!['procesando', 'Completada', 'Rechazada'].includes(estado)) {
             return res.status(400).json({ mensaje: 'Estado no válido' });
         }
 
