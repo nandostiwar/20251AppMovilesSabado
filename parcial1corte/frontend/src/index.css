@@ -1,0 +1,761 @@
+/* ====================================
+   ESTILOS GLOBALES
+   ==================================== */
+:root {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+/* ====================================
+   ESTILOS DE LOGIN Y REGISTRO
+   ==================================== */
+.container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5rem;
+  box-sizing: border-box;
+}
+
+.auth-container {
+  background: rgb(255, 255, 255);
+  padding-top: 1rem;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.auth-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.form-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.form-group-registro {
+  width: 180%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+
+
+
+
+.auth-form input,
+.auth-form button[type="submit"],
+.btn-registro,
+.toggle-auth button {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.auth-form input {
+  padding: 0.875rem 1rem;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #1a1a1a;
+  transition: all 0.2s ease;
+  background: white;
+}
+
+.auth-form input:focus {
+  outline: none;
+  border-color: #1a1a1a;
+  box-shadow: 0 0 0 2px rgba(26, 26, 26, 0.05);
+}
+
+.auth-form button[type="submit"],
+.btn-registro,
+.toggle-auth button {
+  padding: 0.875rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.auth-form button[type="submit"] {
+  background-color: #1a1a1a;
+  color: white;
+  border: none;
+}
+
+.auth-form button[type="submit"]:hover {
+  background-color: #333;
+}
+
+.btn-registro,
+.toggle-auth button {
+  background-color: white;
+  color: #1a1a1a;
+  border: 1.5px solid #1a1a1a;
+  margin-top: 0.5rem;
+}
+
+.btn-registro:hover,
+.toggle-auth button:hover {
+  background-color: #f8f9fa;
+}
+
+.registro-opciones {
+  width: 100%;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.registro-opciones p {
+  color: #6b7280;
+  margin-bottom: 1rem;
+  font-size: 0.975rem;
+}
+
+.toggle-auth {
+  width: 100%;
+  margin-top: 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.toggle-auth p {
+  color: #6b7280;
+  margin-bottom: 0.75rem;
+  font-size: 0.975rem;
+}
+
+/* Mensajes de error y éxito para login/registro */
+.auth-container .error,
+.auth-container .success {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.auth-container .error {
+  background-color: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fee2e2;
+}
+
+.auth-container .success {
+  background-color: #f0fdf4;
+  color: #166534;
+  border: 1px solid #dcfce7;
+}
+
+@media (max-width: 640px) {
+  .auth-container {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+}
+
+/* ====================================
+   ESTILOS DEL PANEL DE ADMINISTRADOR
+   NO MODIFICAR ESTA SECCIÓN
+   ==================================== */
+
+/* Todos los estilos existentes del panel de administrador se mantienen exactamente igual */
+.admin-dashboard {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin: 5rem auto 2rem;
+  padding: 2rem;
+  width: fit-content;
+  min-width: min-content;
+  max-width: 95%;
+}
+
+.admin-dashboard h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+/* Header del panel */
+.ventas-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.ventas-header h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: #2d3748;
+  font-size: 1.1rem;
+}
+
+/* Botón de actualizar */
+.btn-actualizar {
+  background: white;
+  border: 1px solid #e2e8f0;
+  color: #4a5568;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-actualizar:hover:not(:disabled) {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.btn-actualizar:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Animación de rotación */
+.rotate {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* Contenedor de la tabla */
+.ventas-table-container {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Tabla */
+.ventas-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.6875rem; /* Reducido al mismo tamaño que los estados */
+}
+
+.ventas-table th,
+.ventas-table td {
+  padding: 0.625rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+  white-space: nowrap; /* Mantener texto en una línea */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Mostrar ... si el texto es muy largo */
+}
+
+/* Columnas de la tabla */
+.ventas-table th:nth-child(1) { 
+  width: 140px; 
+  max-width: 140px; 
+} /* Fecha */
+.ventas-table th:nth-child(2) { 
+  width: 180px;
+  max-width: 180px;
+} /* Usuario */
+.ventas-table th:nth-child(3) { 
+  width: 110px;
+  max-width: 110px;
+} /* Venta */
+.ventas-table th:nth-child(4) { 
+  width: 160px;
+  max-width: 160px;
+} /* Producto */
+.ventas-table th:nth-child(5) { 
+  width: 100px;
+  max-width: 100px;
+} /* Estado */
+.ventas-table th:nth-child(6) { 
+  width: 160px;
+  max-width: 160px;
+} /* Acciones */
+
+/* Aplicar el mismo estilo a las celdas */
+.ventas-table td:nth-child(1),
+.ventas-table td:nth-child(2),
+.ventas-table td:nth-child(3),
+.ventas-table td:nth-child(4),
+.ventas-table td:nth-child(5),
+.ventas-table td:nth-child(6) {
+  max-width: inherit;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Estados con etiquetas */
+.estado-venta {
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Botones de acción */
+.btn-aprobar,
+.btn-rechazar {
+  padding: 0.3rem 0.6rem; /* Reducido de 0.375rem 0.75rem */
+  border-radius: 4px;
+  font-size: 0.6875rem; /* Reducido de 0.75rem */
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.btn-aprobar {
+  background-color: #ecfdf5;
+  color: #065f46;
+  border-color: #d1fae5;
+}
+
+.btn-aprobar:hover:not(:disabled) {
+  background-color: #d1fae5;
+}
+
+.btn-rechazar {
+  background-color: #fef2f2;
+  color: #991b1b;
+  border-color: #fee2e2;
+}
+
+.btn-rechazar:hover:not(:disabled) {
+  background-color: #fee2e2;
+}
+
+.btn-aprobar:disabled,
+.btn-rechazar:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Mensajes de estado */
+.success,
+.error {
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+.success {
+  background-color: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #d1fae5;
+}
+
+.error {
+  background-color: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fee2e2;
+}
+
+/* Navbar */
+.navbar {
+  padding: 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  transition: background-color 0.2s ease, backdrop-filter 0.2s ease;
+}
+
+/* Contenido del Navbar */
+.navbar-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1.5rem;
+}
+
+/* Estilos para el título */
+.navbar-title {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: white;
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+/* Información del usuario */
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: white;
+}
+
+/* Botón de cerrar sesión */
+.user-info button {
+  background: #e63946;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.user-info button:hover {
+  background: #c62828;
+}
+
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.user-info span {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.875rem;
+}
+
+.user-info button {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+}
+
+.user-info button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/*==========================================================================================*/
+/*==========================================================================================*/
+/*==========================================================================================*/
+
+
+
+/*=======================MARKETPLACE=======================================*/
+
+/* ====================================
+   ESTILOS DE PASARELA DE PAGO Y MARKETPLACE
+   ==================================== */
+   .pasarela-pago {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    max-width: 750px; /* Aumentado */
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .pasarela-pago h3 {
+    font-size: 1.5rem;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+  }
+  
+  .detalles-producto p {
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  .pasarela-pago .error {
+    background-color: #fef2f2;
+    color: #991b1b;
+    border: 1px solid #fee2e2;
+    padding: 0.75rem;
+    border-radius: 8px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .pasarela-pago .form-group {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  
+  .pasarela-pago input {
+    width: 100%;
+    padding: 0.875rem;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+  
+  .metodos-pago {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+  }
+  
+  .metodos-pago button {
+    flex: 1;
+    padding: 0.875rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .metodos-pago button:first-child {
+    background-color: #1a1a1a;
+    color: white;
+    border: none;
+  }
+  
+  .metodos-pago button:first-child:hover {
+    background-color: #333;
+  }
+  
+  .metodos-pago .cancelar {
+    background: white;
+    border: 1.5px solid #1a1a1a;
+    color: #1a1a1a;
+  }
+  
+  .metodos-pago .cancelar:hover {
+    background-color: #f8f9fa;
+  }
+  
+  
+  /* ====================================
+     ESTILOS DEL MARKETPLACE
+     ==================================== */
+  .marketplace {
+    width: 100%;
+    max-width: 600px;
+    margin: 2rem;
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  }
+  
+  .marketplace h2 {
+    text-align: center;
+    font-size: 1.75rem;
+    color: #1a1a1a;
+    margin-bottom: 1.5rem;
+  }
+  
+  .product-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  
+  .product-form .form-group input {
+    width: 80%;
+    padding: 0.875rem;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+  
+  .product-form button {
+    margin: auto;
+    width: 80%;
+    padding: 0.875rem;
+    background-color: #1a1a1a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .product-form button:hover {
+    background-color: #333;
+  }
+  
+  .mis-compras {
+    margin-top: 2rem;
+  }
+  
+  .compras-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .btn-actualizar-lista {
+    background: white;
+    border: 1.5px solid #1a1a1a;
+    color: #1a1a1a;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    cursor: pointer;
+  }
+  
+  .btn-actualizar-lista:hover:not(:disabled) {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+  }
+  
+  /* Contenedor de la tabla */
+.compras-table-container {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Tabla */
+.compras-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.6875rem; /* Igual que en ventas-table */
+}
+
+.compras-table th,
+.compras-table td {
+  padding: 0.625rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+  white-space: nowrap; /* Mantener texto en una línea */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Mostrar ... si el texto es muy largo */
+}
+
+.compras-table th {
+  background: #f8f9fa;
+  font-weight: 600;
+}
+
+.compras-table tbody tr:hover {
+  background: #f1f5f9;
+}
+
+
+/*==========================================================================*/
+
+
+/* Media queries para responsividad */
+@media (max-width: 768px) {
+  .admin-dashboard {
+    padding: 1.5rem;
+    margin-top: 6rem;
+  }
+
+  .ventas-table th,
+  .ventas-table td {
+    padding: 0.75rem;
+  }
+
+  .navbar-content {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .user-info {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}
+
+/*FOOTER*/
+
+/* Footer */
+.footer {
+  background-color: #1a1a1a;
+  color: white;
+  text-align: center;
+  padding: 1rem 0;
+  margin-top: 2rem;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer p {
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-links a {
+  color: white;
+  font-size: 1.25rem;
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: #00aaff;
+}
+
+
