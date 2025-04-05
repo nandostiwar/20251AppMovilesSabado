@@ -1,0 +1,39 @@
+/* Estilos globales para la aplicación */
+body {
+  margin: 0;
+  font-family: 'Poppins', 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f0f2f5;
+  color: #212529;
+}
+
+code {
+  font-family: 'Fira Code', Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+/* Variables CSS globales */
+:root {
+  --primary-color: #17a2b8;
+  --secondary-color: #495057;
+  --success-color: #198754;
+  --danger-color: #c82333;
+  --warning-color: #ffca2c;
+  --info-color: #0dcaf0;
+  --light-color: #e9ecef;
+  --dark-color: #212529;
+}
+
+/* Estilos base adicionales */
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: var(--dark-color);
+}
